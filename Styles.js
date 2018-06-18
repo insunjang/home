@@ -23,7 +23,7 @@ export const Styles = StyleSheet.create({
         backgroundColor: '#C5E1A5',
     },
     Comment: {
-        height: 98,
+        //height: 98,
         paddingLeft:15,
         paddingRight:15,
         backgroundColor: '#ffffff',

@@ -6,9 +6,10 @@ import {
     StyleSheet,
     Text,
     TextInput,
+    ScrollView,
     TouchableOpacity
 } from 'react-native';
-
+import InputScrollView from 'react-native-input-scroll-view';
 import {Styles} from './Styles';
 import AutoGrowingTextInput from './AutoGrowingTextInput';
 
@@ -46,8 +47,9 @@ export default class WaitingComments extends Component {
     render() {
             return ( 
                 < View style = {Styles.WaitingComment} >
-                    < View style = {{height:1,backgroundColor:'#ebebeb',}} />
-                        < AutoGrowingTextInput
+                    <View style = {{height:1,backgroundColor:'#ebebeb',}} />
+                    {/*< InputScrollView >*/}
+                        <AutoGrowingTextInput
                         ref = "CommentInput"
                         style = {
                             {
@@ -70,7 +72,8 @@ export default class WaitingComments extends Component {
                         underlineColorAndroid = 'transparent'
                         //numberOfLines = {5}
                         />
-                    < View style = {{width:120,}}>
+                        {/*</InputScrollView >*/}
+                    < View style = {{width:250,}}>
                         < View style = {{width:'100%', position:'absolute', paddingRight:15, bottom:1,alignItems:'flex-end',}} >
                             <TouchableOpacity onPress={this.addTodo.bind(this)}
                                         style ={{}}>
@@ -82,5 +85,18 @@ export default class WaitingComments extends Component {
 
             )
         }
+        
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'stretch',
+        justifyContent: 'center',
+        paddingTop: 5
+    },
+    input: {
+        height: 40,
+    },
+});
 
