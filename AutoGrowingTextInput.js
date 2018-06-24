@@ -1,112 +1,80 @@
 import React, {
     Component
 } from 'react';
-import ReactNative, {
-    TextInput,
-    Platform,
-    NativeModules
+import {
+    TextInput
 } from 'react-native';
+
 import PropTypes from 'prop-types';
 
-const ANDROID_PLATFORM = (Platform.OS === 'android');
+export default class AutogrowInput extends Component {
 
-const AutoGrowTextInputManager = NativeModules.AutoGrowTextInputManager;
+    state = {
+        height: 35,
+    };
 
-export default class AutoGrowingTextInput extends Component {
-    constructor(props) {
-        super(props);
-        this.setNativeProps = this.setNativeProps.bind(this);
-    }
+    componentWillMount() {
+        const {
+            defaultHeight
+        } = this.props;
 
-    componentDidMount() {
-        if (this.shouldApplyNativeSettings()) {
-            const reactTag = this.textInputReactTag();
-            if (reactTag) {
-                AutoGrowTextInputManager.applySettingsForInput(reactTag, {
-                    enableScrollToCaret: this.props.enableScrollToCaret,
-                    maxHeight: this.props.maxHeight
-                });
-            }
+        if (defaultHeight) {
+            this.setState({
+                height: defaultHeight,
+            });
         }
     }
 
-    componentWillUnmount() {
-        if (this.shouldApplyNativeSettings()) {
-            const reactTag = this.textInputReactTag();
-            if (reactTag) {
-                AutoGrowTextInputManager.performCleanupForInput(reactTag);
-            }
+    onContentSizeChange = (event) => {
+        if (this.state.height !== event.nativeEvent.contentSize.height) {
+            this.setState({
+                height: Math.max(this.props.defaultHeight, event.nativeEvent.contentSize.height),
+            });
         }
     }
 
-    shouldApplyNativeSettings() {
-        return AutoGrowTextInputManager && (ANDROID_PLATFORM || this.props.enableScrollToCaret);
+    resetInputText = () => {
+        if (this.inputRef) {
+            this.inputRef.setNativeProps({
+                text: ''
+            });
+            this.setState({
+                height: this.props.defaultHeight,
+            });
+        }
     }
 
-    textInputReactTag() {
-        if (this._textInput) {
-            return ReactNative.findNodeHandle(this._textInput);
-        }
+    focus = () => {
+        //if (this.inputRef && this.inputRef.focus) {
+          //  this.inputRef.focus();
+        //}
+        this.refs.input.focus();
     }
 
     render() {
-        return ( <
-            TextInput multiline { ...this.props
-            } { ...this.style
+        return ( <TextInput 
+            //ref = {ref => this.inputRef = ref}
+            ref = {'input'}
+            multiline { ...this.props
             }
             style = {
                 [this.props.style, {
-                    height: 'auto'
+                    height: this.state.height
                 }]
             }
-            ref = {
-                (r) => {
-                    this._textInput = r;
-                }
+            onContentSizeChange = {
+                this.onContentSizeChange
             }
-            />
-        );
-    }
-
-    setNativeProps(nativeProps = {}) {
-        this._textInput.setNativeProps(nativeProps);
-    }
-
-    resetHeightToMin() {
-        this.setNativeProps({
-            text: ''
-        });
-    }
-
-    clear() {
-        if (ANDROID_PLATFORM) {
-            AutoGrowTextInputManager.resetKeyboardInput(ReactNative.findNodeHandle(this._textInput))
+            />);
         }
-        return this._textInput.clear();
     }
 
-    focus() {
-        return this._textInput.focus();
-    }
-
-    blur() {
-        this._textInput.blur();
-    }
-
-    isFocused() {
-        return this._textInput.isFocused();
-    }
-
-    getRef() {
-        return this._textInput;
-    }
-}
-
-AutoGrowingTextInput.propTypes = {
-    ...TextInput.propTypes,
-    enableScrollToCaret: PropTypes.bool,
-};
-AutoGrowingTextInput.defaultProps = {
-    ...TextInput.defaultProps,
-    enableScrollToCaret: false,
-}
+    AutogrowInput.propTypes = {
+        style: PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.array,
+            PropTypes.object
+        ]),
+        onChange: PropTypes.func,
+        defaultHeight: PropTypes.number,
+    };

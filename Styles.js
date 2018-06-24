@@ -28,6 +28,12 @@ export const Styles = StyleSheet.create({
         paddingRight:15,
         backgroundColor: '#ffffff',
     },
+    commentGuidePopup:{
+        flexDirection:'row',
+        height:33,
+        width:'100%',
+        backgroundColor:'#ebebeb'
+    },
     WaitingComment:{
         //height: 120,
         width:'100%',

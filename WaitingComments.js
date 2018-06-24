@@ -5,14 +5,16 @@ import {
     View,
     StyleSheet,
     Text,
-    TextInput,
     ScrollView,
+    Keyboard,
+    TextInput,
+    findNodeHandle,
     TouchableOpacity
 } from 'react-native';
 import InputScrollView from 'react-native-input-scroll-view';
 import {Styles} from './Styles';
-import AutoGrowingTextInput from './AutoGrowingTextInput';
-
+import AutogrowInput from './AutoGrowingTextInput';
+import { KeyboardAwareScrollView, KeyboardAwareFlatList} from 'react-native-keyboard-aware-scroll-view'
 export default class WaitingComments extends Component {
     constructor(props) {
             super(props);
@@ -26,6 +28,13 @@ export default class WaitingComments extends Component {
                 placeholder: '이게시물에 댓글을 남겨주세요',
                 comment: '',
             };
+    }
+
+    componentDidUpdate (){
+        console.log('focus',this.props.focus)
+        if(this.props.focus){
+            this.focus()
+        }
     }
 
     addTodo() {
@@ -43,14 +52,26 @@ export default class WaitingComments extends Component {
         })
     }
 
+    focus = () => {
+        this.commentInput.focus()
+    }
+
+    handleOnfocus = () =>{
+        this.setState({placeholder:''})
+        this.props.onFocus()
+    }
+
 
     render() {
             return ( 
                 < View style = {Styles.WaitingComment} >
                     <View style = {{height:1,backgroundColor:'#ebebeb',}} />
-                    {/*< InputScrollView >*/}
-                        <AutoGrowingTextInput
-                        ref = "CommentInput"
+                    {/*< KeyboardAwareScrollView ref={ref => {this.scroll = ref}}
+                        onKeyboardWillShow={(frames) => {
+                                console.log('Keyboard event', frames)
+                            }}>*/}
+                        < AutogrowInput
+                        ref = {ref => this.commentInput = ref}
                         style = {
                             {
                                 flex:1,
@@ -58,22 +79,24 @@ export default class WaitingComments extends Component {
                                 paddingLeft:15,
                                 justifyContent:'flex-start',
                                 alignItems: 'center',
-                                //borderColor: 'gray',
                                 borderWidth: 1,
                             }
                         }
                         placeholder={this.state.placeholder}
                         onChangeText={(text) => {this.setState({inputText: text})}} 
-                        onFocus={() => this.setState({placeholder:''})}
+                        //onFocus={()=>this.scrollToIndex()}
+                        //onFocus={(event) => {this._scrollToInput(findNodeHandle(event.target))}}
+                        onFocus={this.handleOnfocus}
                         value={this.state.inputText}
                         multiline={true}
-
+                        autoFocus = {false}
                         maxHeight={120}
+                        //minHeight={33}
                         underlineColorAndroid = 'transparent'
                         //numberOfLines = {5}
                         />
-                        {/*</InputScrollView >*/}
-                    < View style = {{width:250,}}>
+                       {/*} </KeyboardAwareScrollView >*/}
+                    < View style = {{width:110,}}>
                         < View style = {{width:'100%', position:'absolute', paddingRight:15, bottom:1,alignItems:'flex-end',}} >
                             <TouchableOpacity onPress={this.addTodo.bind(this)}
                                         style ={{}}>
@@ -88,15 +111,4 @@ export default class WaitingComments extends Component {
         
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        paddingTop: 5
-    },
-    input: {
-        height: 40,
-    },
-});
 
