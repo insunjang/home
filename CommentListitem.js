@@ -42,8 +42,6 @@ export default class CommentListitem extends Component {
                         </View>
                     < View style={{paddingTop:7, /*height:this.state.heights,*/ alignItems:'flex-start'}} >
                             <Text style={{color:'#000000',fontSize:13}} 
-                                numberOfLines = {3}
-                                ellipsizeMode ={'tail'}
                             > 
                             {comment} 
                             </Text>
@@ -56,7 +54,9 @@ export default class CommentListitem extends Component {
                                 </View>
                                 <View style={{width:12}}/>
                                     < TouchableOpacity 
-                                        onPress = {()=> showCommentGuidePopup(name,index)}
+                                        onPress = {
+                                            () => showCommentGuidePopup(name, index, comment)
+                                        }
 
                                     >
                                         < View >

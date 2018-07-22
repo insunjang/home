@@ -92,7 +92,8 @@ export default class Detailview extends Component {
             focus:false,
             pressedIndex:0,
             itemHeight:0,
-            onfocus: false
+            onfocus: false,
+            comment:''
             //keyboardHeight:0,
             //keyboardSpace: 0
         }
@@ -136,7 +137,7 @@ export default class Detailview extends Component {
     }
 
     makeDetailList = () =>{
-        let contentsInfoDatas = [{key:CONTENTINFO},{key:CONTENTBODY},{key:ICONS}]
+        let contentsInfoDatas = [/*{key:CONTENTINFO},{key:CONTENTBODY},{key:ICONS}*/]
         let listDatas = [];
         let commentlist = [];
 
@@ -151,11 +152,12 @@ export default class Detailview extends Component {
         console.log('detaillistDatas',this.state.detaillistDatas)
     }
 
-    showCommentGuidePopup = (name,index) =>{ 
+    showCommentGuidePopup = (name, index, comment) => {
         this.setState({
             pressedAttachComment: true,
             name: name,
             pressedIndex: index,
+            comment: comment,
             focus: true
         })
         console.log('showCommentGuidePopup index', index)
@@ -239,7 +241,7 @@ onContentSizeChange = (event) => {
     //console.log('itemHeight', height)
 }
 
-    render() {
+render() {
         const {detaillistDatas,focus,pressedIndex} = this.state
         const {name} = this.props
 
@@ -269,6 +271,7 @@ onContentSizeChange = (event) => {
                 <WaitingComments name={name}
                               focus={this.state.focus}
                               onFocus = {this.onFocus}
+                              comment = {this.state.comment}
             />
             </View>
 

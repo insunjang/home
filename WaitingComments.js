@@ -18,7 +18,7 @@ import { KeyboardAwareScrollView, KeyboardAwareFlatList} from 'react-native-keyb
 export default class WaitingComments extends Component {
     constructor(props) {
             super(props);
-
+            
             this.state = {
                 pressRegiStatus:false,
                 lockMode:false,
@@ -28,6 +28,7 @@ export default class WaitingComments extends Component {
                 placeholder: '이게시물에 댓글을 남겨주세요',
                 comment: '',
             };
+            this.handleOnfocus = this.handleOnfocus.bind(this)
     }
 
     componentDidUpdate (){
@@ -56,13 +57,21 @@ export default class WaitingComments extends Component {
         this.commentInput.focus()
     }
 
-    handleOnfocus = () =>{
-        this.setState({placeholder:''})
+    handleOnfocus = () => {
+        this.setState({
+            placeholder:'',
+            inputText: this.props.comment,
+        })
         this.props.onFocus()
+    }
+
+    onChangText= () => {
+
     }
 
 
     render() {
+        console.log('******comment', this.props.comment)
             return ( 
                 < View style = {Styles.WaitingComment} >
                     <View style = {{height:1,backgroundColor:'#ebebeb',}} />
@@ -77,9 +86,9 @@ export default class WaitingComments extends Component {
                                 flex:1,
                                 fontSize: 13,                                
                                 paddingLeft:15,
-                                justifyContent:'flex-start',
-                                alignItems: 'center',
-                                borderWidth: 1,
+                                //justifyContent:'flex-start',
+                                //alignItems: 'center',
+                                //borderWidth: 1,
                             }
                         }
                         placeholder={this.state.placeholder}
@@ -91,12 +100,12 @@ export default class WaitingComments extends Component {
                         multiline={true}
                         autoFocus = {false}
                         maxHeight={120}
-                        //minHeight={33}
+                        minHeight={120}
                         underlineColorAndroid = 'transparent'
                         //numberOfLines = {5}
                         />
                        {/*} </KeyboardAwareScrollView >*/}
-                    < View style = {{width:110,}}>
+                    < View style = {{width:50,}}>
                         < View style = {{width:'100%', position:'absolute', paddingRight:15, bottom:1,alignItems:'flex-end',}} >
                             <TouchableOpacity onPress={this.addTodo.bind(this)}
                                         style ={{}}>
