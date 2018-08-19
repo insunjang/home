@@ -18,7 +18,7 @@ public class MainActivity extends ReactActivity {
     protected void onResume() {
         super.onResume();
         Log.d("MainActivity","#######onResume" );
-        Intent sendIntent = new Intent("EventBridgeModuleIntentEventName"); 
+        Intent sendIntent = new Intent(EventBridgeModuleIntentEventName); 
         sendIntent.putExtra(EventBridgeModuleIntentEventDataKey, "Intent String"); 
     this.sendBroadcast(sendIntent);
 

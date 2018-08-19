@@ -25,6 +25,10 @@ export default class HomeScreen extends Component {
             DeviceEventEmitter.addListener('MSREventBridgeModuleEvent', this.goToDetail);
         }
 
+        componentWillUnmount() {
+            DeviceEventEmitter.removeListener('MSREventBridgeModuleEvent');
+        }
+
     goToDetail = () => {
         console.log('############reciedved event from native')
         this.props.navigation.navigate('Details')
