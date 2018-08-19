@@ -25,7 +25,7 @@ import com.facebook.react.uimanager.NativeViewHierarchyManager;
 import com.facebook.react.uimanager.RootView;
 import com.facebook.react.uimanager.UIBlock;
 import com.facebook.react.uimanager.UIManagerModule;
-
+import com.facebook.react.bridge.LifecycleEventListener;
 import java.util.HashMap;
 import java.util.Map;
 import android.util.Log;
@@ -33,7 +33,7 @@ import android.util.Log;
 /**
  * Module that handles receiving and sending events from and to React Native
  */
-public class TestBridgeModule extends ReactContextBaseJavaModule /*implements TestBridgeEventEmitter */{
+public class TestBridgeModule extends ReactContextBaseJavaModule implements LifecycleEventListener/*implements TestBridgeEventEmitter */{
 
   // Static Identifier for events that are sent to React Native. These needs to be in sync with iOS!
   private static final String EventBridgeModuleName = "MSREventBridge";
@@ -80,6 +80,21 @@ public class TestBridgeModule extends ReactContextBaseJavaModule /*implements Te
   public String getName() {
     return EventBridgeModuleName;
   }
+
+  @Override
+    public void onHostResume() {
+
+    }
+
+    @Override
+    public void onHostPause() {
+
+    }
+
+    @Override
+    public void onHostDestroy() {
+        mReactContext.unregisterReceiver(mLocalBroadcastReceiver);
+    } 
 /*
   // Exported constants
   @Override
