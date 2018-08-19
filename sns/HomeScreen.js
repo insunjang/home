@@ -6,7 +6,8 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    View
+    View,
+    DeviceEventEmitter
 } from 'react-native';
 
 import {
@@ -18,6 +19,17 @@ export default class HomeScreen extends Component {
     static navigationOptions = {
         title: 'Welcome',
     }
+
+    componentWillMount() {
+
+            DeviceEventEmitter.addListener('MSREventBridgeModuleEvent', this.goToDetail);
+        }
+
+    goToDetail = () => {
+        console.log('############reciedved event from native')
+        this.props.navigation.navigate('Details')
+    }
+
     
     render() {
         return ( <View style = {styles.container} >
