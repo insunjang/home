@@ -7,7 +7,8 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
-    WebView
+    WebView,
+    Text
 } from 'react-native';
 import ArrowComponent from 'react-native-zindex-views';
 
@@ -20,24 +21,12 @@ export default class HeadArticle extends Component {
         return ( 
             <View style = {Styles.HeadArticle} >
             
-                < View style = {
-                    {
-                        top: 70,
-                        right: 15,
-                        position: 'absolute',
-                        alignItems: 'flex-end'
-                    }
-                    } >
+                < View style = {{top: 70,right: 15,position: 'absolute',alignItems: 'flex-end'}} >
                     
-                    < TouchableOpacity style = {
-                            {
-                            }
-                            }
-                            onPress = {
-                                () => this.forceUpdate()
-                            } >
+                    < TouchableOpacity style = {{}}
+                            onPress = {() => this.forceUpdate()} >
                         <Image source = {MobileIcon30}/>
-                        
+                        <Text style={{color:'#000000',fontSize:13}}> {this.props.title} </Text>
                     </TouchableOpacity>
                 </View>
             </View>

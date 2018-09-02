@@ -79,7 +79,7 @@ export default class WaitingComments extends Component {
                         onKeyboardWillShow={(frames) => {
                                 console.log('Keyboard event', frames)
                             }}>*/}
-                        < AutogrowInput
+                        <AutogrowInput
                         ref = {ref => this.commentInput = ref}
                         style = {
                             {

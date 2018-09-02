@@ -20,17 +20,13 @@ import {Styles} from './Styles';
 import WaitingComments from './WaitingComments';
 import CommentGuidePopup from './CommentGuidePopup';
 import { KeyboardAwareScrollView, KeyboardAwareFlatList} from 'react-native-keyboard-aware-scroll-view'
+import { createStackNavigator } from 'react-navigation';
+import Swiper from './Swiper';
+import SwiperFlatList from './SwiperFlatList';
+import DetailviewContents from './DetailviewContents';
+import GestureRecognizer, {swipeDirections} from './GestureRecognizer';
 
-
-const CONTENTINFO = "CONTENTINFO";
-const CONTENTBODY = "CONTENTBODY";
-const ICONS = "ICONS";
-const COMMENTLISTITEM = "COMMENTLISTITEM";
-const {WIDTH, HEIGHT} = Dimensions.get('window')
-
-const defaultState = {
-    elements: [
-        {
+    commentArr = [{
             name: "Charil",
             comment: "exploit proactive functionalities",
             time: "29/10/2016"
@@ -64,219 +60,235 @@ const defaultState = {
             name: "Charil7",
             comment: "exploit proactive functionalities",
             time: "29/10/2016"
-        }, {
+        },
+        {
             name: "Charil8",
             comment: "exploit proactive functionalities",
             time: "29/10/2016"
-        }, {
+        },
+        {
             name: "Charil9",
             comment: "exploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalities",
             time: "29/10/2016"
-        }, {
+        },
+        {
             name: "Charil10",
             comment: "exploit proactive functionalities",
             time: "29/10/2016"
         },
 
     ]
-};
+
+        commentArr2 = [{
+                name: "Chari11",
+                comment: "exploit proactive functionalities",
+                time: "29/10/2016"
+            },
+            {
+                name: "Charil12",
+                comment: "exploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalities",
+                time: "29/10/2016"
+            },
+            {
+                name: "Charil13",
+                comment: "exploit proactive functionalities",
+                time: "29/10/2016"
+            },
+            {
+                name: "Charil14",
+                comment: "exploit proactive functionalities",
+                time: "29/10/2016"
+            },
+            {
+                name: "Charil15",
+                comment: "exploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalities",
+                time: "29/10/2016"
+            },
+            {
+                name: "Charil16",
+                comment: "exploit proactive functionalities",
+                time: "29/10/2016"
+            },
+            {
+                name: "Charil17",
+                comment: "exploit proactive functionalities",
+                time: "29/10/2016"
+            },
+            {
+                name: "Charil18",
+                comment: "exploit proactive functionalities",
+                time: "29/10/2016"
+            },
+            {
+                name: "Charil19",
+                comment: "exploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalities",
+                time: "29/10/2016"
+            },
+            {
+                name: "Charil20",
+                comment: "exploit proactive functionalities",
+                time: "29/10/2016"
+            },
+
+        ]
+
+
+
+    const data = [{
+                id: '0',
+                title: "Article0",
+                comment: commentArr,
+                time: "29/10/2016"
+            },
+            {
+                id: '1',
+                title: "Article1",
+                comment: commentArr2,
+                time: "29/10/2016"
+            },
+            {
+                id: '2',
+                title: "Article2",
+                comment: commentArr,
+                time: "29/10/2016"
+            },
+            {
+                id: '3',
+                title: "Article3",
+                comment: commentArr2,
+                time: "29/10/2016"
+            },
+            {
+                id: '4',
+                title: "Article4",
+                comment: commentArr,
+                time: "29/10/2016"
+            },
+            {
+                id: '5',
+                title: "Article5",
+                comment: commentArr2,
+                time: "29/10/2016"
+            },
+            {
+                id: '6',
+                title: "Article6",
+                comment: commentArr,
+                time: "29/10/2016"
+            },
+            {
+                id: '7',
+                title: "Article7",
+                comment: commentArr2,
+                time: "29/10/2016"
+            },
+            {
+                id: '8',
+                title: "Article8",
+                comment: commentArr,
+                time: "29/10/2016"
+            },
+            {
+                id: '9',
+                title: "Article9",
+                comment: commentArr2,
+                time: "29/10/2016"
+            },
+
+        ]
 
 export default class Detailview extends Component {
     constructor(props) {
         super(props);
 
         this.state={
-            detaillistDatas:[],
-            pressedAttachComment:false,
-            name:'',
-            focus:false,
-            pressedIndex:0,
-            itemHeight:0,
-            onfocus: false,
-            comment:''
-            //keyboardHeight:0,
-            //keyboardSpace: 0
+            index:0
         }
-
     }
 
     static navigationOptions = {
         title: 'Detailview',
     }
 
-    componentDidMount() {
-        //this.keyboardDidShowListener = Keyboard.addListener('keyboardWillShow', this._keyboardDidShow);
-        //this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
-        this.makeDetailList();
-    }
+_renderItem = ({item,index}) => (
+    <DetailviewContents
+        //index = {this.props.navigation.state.params.index}
+        //title = {this.props.navigation.state.params.title}
+        index = {index}
+        title = {item.title}
 
-    componentDidUpdate(){
-        //this.flatList.scrollToIndex(0);
-    }
+    />
+  );
 
+ _keyExtractor = (item, index) => item.id;
 
-    componentWillMount() {
-        this.setState({
-            detaillistDatas: []
-        })
-    }
-
-    componentWillUnmount() {
-        //this.keyboardDidShowListener.remove();
-        //this.keyboardDidHideListener.remove();
-    }
-
-    _keyboardDidShow() {
-        alert('Keyboard Shown');
-        this.setState({touchedTextInput: true})
-
-    }
-
-    _keyboardDidHide() {
-        alert('Keyboard Hidden');
-    }
-
-    makeDetailList = () =>{
-        let contentsInfoDatas = [/*{key:CONTENTINFO},{key:CONTENTBODY},{key:ICONS}*/]
-        let listDatas = [];
-        let commentlist = [];
-
-        commentlist.push(...defaultState.elements)
-        commentlist.forEach((item, index, array) => {
-            array[index].key = COMMENTLISTITEM});
-        listDatas.push(...contentsInfoDatas)
-        listDatas.push(...commentlist)
-        this.setState({
-            detaillistDatas: listDatas
-        })
-        console.log('detaillistDatas',this.state.detaillistDatas)
-    }
-
-    showCommentGuidePopup = (name, index, comment) => {
-        this.setState({
-            pressedAttachComment: true,
-            name: name,
-            pressedIndex: index,
-            comment: comment,
-            focus: true
-        })
-        console.log('showCommentGuidePopup index', index)
-
-    }
-
-    hideCommentGuidPopup = () => {
-        this.setState({
-            pressedAttachComment: false,
-            name: '',
-            focus: false
-        })
-        this.hidekeyboard()
-    }
-
-    hidekeyboard = () => {
-        Keyboard.dismiss()
-    }
-
-    _renderItem({item,index}) {
-        switch (item.key) {
-        case CONTENTINFO:
-            return <HeadArticle/>
-        case CONTENTBODY:
-            return <BodyArticle/>
-        case ICONS:
-            return <Icons/>
-        case COMMENTLISTITEM:
-            return <CommentListitem
-                    name={item.name}
-                    comment={item.comment}
-                    time={item.time}
-                    showCommentGuidePopup={this.showCommentGuidePopup}
-                    index={index}
-
-            />
-        }
-    }
-
-    _keyExtractor = (item) => {
-        switch(item.key){
-            case CONTENTINFO:
-            case CONTENTBODY:
-            case ICONS:
-                return item.key;
-            case COMMENTLISTITEM:
-                return item.name;
-            }
-    }
-
-    getItemLayout = (data, index) => ({
-        //const {height} = 
-        length: HEIGHT,
-        offset: HEIGHT * index,
-        index
-        
-    });
-
-    onFocus = () => {
-        this.setState({onfocus:true});
-    }
-
-    onLayout = (event) => {
-        if (this.state.pressedAttachComment && this.state.focus)
-            this.flatList.scrollToIndex({animated:true, index:this.state.pressedIndex, viewPosition:1})
-        else if (this.state.onfocus) {
-            setTimeout(() =>{this.flatList.scrollToIndex({animated:true , index: this.state.detaillistDatas.length-1, viewPosition: 1})}  , 100);
-        }
-        else{
-            if (this.flatList) {
-                this.flatList.scrollToOffset({x:0, y: 0, animated: true});
-            }
-        }
+componentDidMount(){
+    this.setState({index: this.props.navigation.state.params.index});
 }
+onSwipeUp(gestureState) {
+    console.log('#########onSwipeUp')
+    //this.setState({myText: 'You swiped up!'});
+  }
 
-onContentSizeChange = (event) => {
-    //let {width, height} = event.nativeEvent.layout
-    this.setState({
-        touchedTextInput: true,
-    })
-    //console.log('itemHeight', height)
-}
+onSwipeDown(gestureState) {
+    console.log('#########onSwipeDown')
+    //this.setState({myText: 'You swiped down!'});
+  }
+
+onSwipeLeft(gestureState) {
+    console.log('#########onSwipeLeft')
+    this.setState({index: this.state.index - 1});
+  }
+
+onSwipeRight(gestureState) {
+    console.log('#########onSwipeRight')
+    this.setState({index: this.state.index + 1});
+  }
+
+onSwipe(gestureName, gestureState) {
+    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
+    this.setState({gestureName: gestureName});
+    switch (gestureName) {
+      case SWIPE_UP:
+        //this.setState({backgroundColor: 'red'});
+        break;
+      case SWIPE_DOWN:
+        //this.setState({backgroundColor: 'green'});
+        break;
+      case SWIPE_LEFT:
+        //this.setState({backgroundColor: 'blue'});
+        break;
+      case SWIPE_RIGHT:
+        //this.setState({backgroundColor: 'yellow'});
+        break;
+    }
+  }
 
 render() {
-        const {detaillistDatas,focus,pressedIndex} = this.state
-        const {name} = this.props
+    const config = {
+        velocityThreshold: 0.3,
+        directionalOffsetThreshold: 80
+    };
+console.log('###########index',this.state.index)
+    return ( 
+            <GestureRecognizer
+            onSwipe={(direction, state) => this.onSwipe(direction, state)}
+            onSwipeUp={(state) => this.onSwipeUp(state)}
+            onSwipeDown={(state) => this.onSwipeDown(state)}
+            onSwipeLeft={(state) => this.onSwipeLeft(state)}
+            onSwipeRight={(state) => this.onSwipeRight(state)}
+            config={config}
+            style={{flex: 1,backgroundColor: this.state.backgroundColor}}
+            >
+                <View style = {[Styles.container]} >
+                    <DetailviewContents
+                    index = {this.state.index}
+                    title = {this.props.navigation.state.params.title}
+                    />
+                </View>
+            </GestureRecognizer>
 
-        console.log('render detaillistDatas', detaillistDatas)
-        console.log('render focus', focus)
-
-        return ( 
-            <View style = {[Styles.container]} >
-            {/*<KeyboardAvoidingView behavior='padding' style={{ flex: 1}} onLayout={this._scrollEnd}>*/}
-                < FlatList
-                    ref={ref => this.flatList = ref}
-                    initialNumToRender = {detaillistDatas.length}
-                    data = {[...detaillistDatas]}
-                    horizontal={false}
-                    keyExtractor = {this._keyExtractor}
-                    renderItem = {this._renderItem.bind(this)}
-                    //getItemLayout={this.getItemLayout}
-                    //initialScrollIndex={0}
-                    //onContentSizeChange = {this.onContentSizeChange}
-                    onLayout = {this.onLayout}
-                />
-            {/*</KeyboardAvoidingView>*/}
-            <View style = {{}}>
-                {this.state.pressedAttachComment && <CommentGuidePopup name = {this.state.name}
-                                                                    hideCommentGuidPopup={this.hideCommentGuidPopup} 
-                                                                    />}
-                <WaitingComments name={name}
-                              focus={this.state.focus}
-                              onFocus = {this.onFocus}
-                              comment = {this.state.comment}
-            />
-            </View>
-
-            </View>
-        );
+    );
     }
 }
 

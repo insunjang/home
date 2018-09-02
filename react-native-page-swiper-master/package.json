@@ -1,0 +1,40 @@
+{
+  "name": "react-native-page-swiper",
+  "keywords": [
+    "react",
+    "react-component",
+    "react-native",
+    "swiper",
+    "ios",
+    "android"
+  ],
+  "version": "0.3.0",
+  "description": "Page Swiper component for React Native.",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fixt/react-native-page-swiper.git"
+  },
+  "author": "Christopher Garvis <cgarvis@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fixt/react-native-page-swiper/issues"
+  },
+  "homepage": "https://github.com/fixt/react-native-page-swiper#readme",
+  "peerDependencies": {
+    "react": "0.14.x || 15.x.x",
+    "react-native": ">=0.18.0 <=0.29.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^4.1.8",
+    "eslint": "^1.10.3",
+    "eslint-config-fixt": "^1.0.1",
+    "eslint-plugin-react": "^3.16.1"
+  }
+}
