@@ -205,7 +205,7 @@ export default class DetailviewContents extends Component {
         let contentsInfoDatas = [{key:CONTENTINFO},{key:CONTENTBODY},{key:ICONS}]
         let listDatas = [];
         let commentlist = [];
-        commentlist.push(...data[this.props.index].comment)
+        commentlist.push(...this.props.item.comment)
         commentlist.forEach((item, index, array) => {
             array[index].key = COMMENTLISTITEM});
         listDatas.push(...contentsInfoDatas)

@@ -202,28 +202,26 @@ export default class Detailview extends Component {
         super(props);
 
         this.state={
-            index:0
+            index:0,
+            renderDatas: []
         }
+        this._renderItem = this._renderItem.bind(this)
     }
 
     static navigationOptions = {
         title: 'Detailview',
     }
 
-_renderItem = ({item,index}) => (
-    <DetailviewContents
-        //index = {this.props.navigation.state.params.index}
-        //title = {this.props.navigation.state.params.title}
-        index = {index}
-        title = {item.title}
-
-    />
-  );
 
  _keyExtractor = (item, index) => item.id;
 
+componentWillMount (){
+    //this.setState({index: this.props.navigation.state.params.index});
+        this.makeDetailList()
+
+
+}
 componentDidMount(){
-    this.setState({index: this.props.navigation.state.params.index});
 }
 onSwipeUp(gestureState) {
     console.log('#########onSwipeUp')
@@ -245,48 +243,66 @@ onSwipeRight(gestureState) {
     this.setState({index: this.state.index + 1});
   }
 
-onSwipe(gestureName, gestureState) {
-    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
-    this.setState({gestureName: gestureName});
-    switch (gestureName) {
-      case SWIPE_UP:
-        //this.setState({backgroundColor: 'red'});
-        break;
-      case SWIPE_DOWN:
-        //this.setState({backgroundColor: 'green'});
-        break;
-      case SWIPE_LEFT:
-        //this.setState({backgroundColor: 'blue'});
-        break;
-      case SWIPE_RIGHT:
-        //this.setState({backgroundColor: 'yellow'});
-        break;
-    }
-  }
+_renderItem = ({item,index}) => {
+        <DetailviewContents
+        index = {index}
+        item = {item}
+        title = {this.props.navigation.state.params.title}
+        />
+
+}
+
+makeDetailList = () =>{
+    let listDatas = [];
+
+    listDatas.push(data[this.props.navigation.state.params.index - 1])
+    listDatas.push(data[this.props.navigation.state.params.index])
+    listDatas.push(data[this.props.navigation.state.params.index + 1])
+        
+    this.setState({
+        renderDatas: listDatas,
+        index:1
+    })
+}
 
 render() {
-    const config = {
-        velocityThreshold: 0.3,
-        directionalOffsetThreshold: 80
-    };
-console.log('###########index',this.state.index)
     return ( 
-            <GestureRecognizer
-            onSwipe={(direction, state) => this.onSwipe(direction, state)}
-            onSwipeUp={(state) => this.onSwipeUp(state)}
-            onSwipeDown={(state) => this.onSwipeDown(state)}
-            onSwipeLeft={(state) => this.onSwipeLeft(state)}
-            onSwipeRight={(state) => this.onSwipeRight(state)}
-            config={config}
-            style={{flex: 1,backgroundColor: this.state.backgroundColor}}
-            >
-                <View style = {[Styles.container]} >
-                    <DetailviewContents
-                    index = {this.state.index}
-                    title = {this.props.navigation.state.params.title}
-                    />
-                </View>
-            </GestureRecognizer>
+    <View style = {[Styles.container]} >
+            <SwiperFlatList
+            autoplay
+            autoplayDelay={3}
+            data = {this.state.renderDatas}
+            index = {this.state.index}
+            renderItem = {this._renderItem}
+            renderAll = {true}
+            />
+
+            {/*<SwiperFlatList>
+            {<View>
+                <DetailviewContents
+                index = {0}
+                item = {this.state.renderDatas[0]}
+                title = {this.props.navigation.state.params.title}
+                />
+
+            </View>
+            <View>
+                <DetailviewContents
+                index = {1}
+                item = {this.state.renderDatas[1]}
+                title = {this.props.navigation.state.params.title}
+                />
+
+            </View>
+            <View>
+                <DetailviewContents
+                index = {2}
+                item = {this.state.renderDatas[2]}
+                title = {this.props.navigation.state.params.title}
+                />
+            </View>
+            </SwiperFlatList >*/}
+        </View>
 
     );
     }

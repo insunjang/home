@@ -199,7 +199,7 @@ export default class SwiperFlatList extends Component {
     return (
       <View>
         <FlatList {...flatListProps} />
-        {showPagination && <PaginationComponent {...paginationProps} />}
+        {/*showPagination && <PaginationComponent {...paginationProps} />*/}
       </View>
     );
   }
