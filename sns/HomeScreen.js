@@ -69,9 +69,63 @@ import HomeScreenListItem from './HomeScreenListItem';
 
     ]
 
+    commentArr2 = [{
+            name: "Chari11",
+            comment: "exploit proactive functionalities",
+            time: "29/10/2016"
+        },
+        {
+            name: "Charil12",
+            comment: "exploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalities",
+            time: "29/10/2016"
+        },
+        {
+            name: "Charil13",
+            comment: "exploit proactive functionalities",
+            time: "29/10/2016"
+        },
+        {
+            name: "Charil14",
+            comment: "exploit proactive functionalities",
+            time: "29/10/2016"
+        },
+        {
+            name: "Charil15",
+            comment: "exploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalities",
+            time: "29/10/2016"
+        },
+        {
+            name: "Charil16",
+            comment: "exploit proactive functionalities",
+            time: "29/10/2016"
+        },
+        {
+            name: "Charil17",
+            comment: "exploit proactive functionalities",
+            time: "29/10/2016"
+        },
+        {
+            name: "Charil18",
+            comment: "exploit proactive functionalities",
+            time: "29/10/2016"
+        },
+        {
+            name: "Charil19",
+            comment: "exploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalitiesexploit proactive functionalities",
+            time: "29/10/2016"
+        },
+        {
+            name: "Charil20",
+            comment: "exploit proactive functionalities",
+            time: "29/10/2016"
+        },
 
-const data = [{
-            id:'0',
+    ]
+
+
+
+    const data = [{
+            id: '0',
             title: "Article0",
             comment: commentArr,
             time: "29/10/2016"
@@ -79,7 +133,7 @@ const data = [{
         {
             id: '1',
             title: "Article1",
-            comment: commentArr,
+            comment: commentArr2,
             time: "29/10/2016"
         },
         {
@@ -91,7 +145,7 @@ const data = [{
         {
             id: '3',
             title: "Article3",
-            comment: commentArr,
+            comment: commentArr2,
             time: "29/10/2016"
         },
         {
@@ -103,7 +157,7 @@ const data = [{
         {
             id: '5',
             title: "Article5",
-            comment: commentArr,
+            comment: commentArr2,
             time: "29/10/2016"
         },
         {
@@ -111,23 +165,23 @@ const data = [{
             title: "Article6",
             comment: commentArr,
             time: "29/10/2016"
-        }, 
+        },
         {
             id: '7',
             title: "Article7",
-            comment: commentArr,
+            comment: commentArr2,
             time: "29/10/2016"
-        }, 
+        },
         {
             id: '8',
             title: "Article8",
             comment: commentArr,
             time: "29/10/2016"
-        }, 
+        },
         {
             id: '9',
             title: "Article9",
-            comment: commentArr,
+            comment: commentArr2,
             time: "29/10/2016"
         },
 
@@ -140,11 +194,11 @@ export default class HomeScreen extends Component {
 
     componentWillMount() {
 
-            DeviceEventEmitter.addListener('MSREventBridgeModuleEvent', this.goToDetail);
+            //DeviceEventEmitter.addListener('MSREventBridgeModuleEvent', this.goToDetail);
     }
 
     componentWillUnmount() {
-            DeviceEventEmitter.removeListener('MSREventBridgeModuleEvent');
+            //DeviceEventEmitter.removeListener('MSREventBridgeModuleEvent');
     }
 
     goToDetail = () => {
@@ -164,7 +218,7 @@ export default class HomeScreen extends Component {
     makeDetailList = () => {
         let listDatas = [];
         listDatas.push(...data)
-        listDatas.push(...commentlist)
+        //listDatas.push(...commentlist)
         this.setState({
             listDatas: listDatas,
             title: this.props.navigation.state.params.title
@@ -177,7 +231,7 @@ export default class HomeScreen extends Component {
 
     _onPressItem = (id, index) => {
         // updater functions are preferred for transactional updates
-        this.props.navigation.navigate('Details', {index:index, title: data[index].title})
+        this.props.navigation.navigate('Details', {index:index, title: data[index].title, data:data})
         /*this.setState((state) => {
             // copy the map rather than modifying state.
             const selected = new Map(state.selected);

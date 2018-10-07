@@ -205,15 +205,18 @@ export default class DetailviewContents extends Component {
         let contentsInfoDatas = [{key:CONTENTINFO},{key:CONTENTBODY},{key:ICONS}]
         let listDatas = [];
         let commentlist = [];
+        if(this.props.item !== undefined && this.props.item !== null){
         commentlist.push(...this.props.item.comment)
         commentlist.forEach((item, index, array) => {
-            array[index].key = COMMENTLISTITEM});
+            array[index].key = COMMENTLISTITEM
+        });
         listDatas.push(...contentsInfoDatas)
         listDatas.push(...commentlist)
         this.setState({
             detaillistDatas: listDatas,
         })
-        console.log('detaillistDatas',this.state.detaillistDatas)
+        console.log('detaillistDatas', this.state.detaillistDatas)
+        }
     }
 
     showCommentGuidePopup = (name, index, comment) => {
